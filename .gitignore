@@ -1,0 +1,40 @@
+# Gradle
+.gradle/
+build/
+/local.properties
+gradle.properties.local
+
+# Android Studio / IntelliJ IDEA
+*.iml
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetDropDown.xml
+.idea/gradle.xml
+.idea/migrations/
+.idea/androidTestResultsUserPreferences.xml
+
+# Native build
+.externalNativeBuild/
+.cxx/
+
+# Keystore files (никогда не коммитить!)
+*.jks
+*.keystore
+keystore.properties
+
+# Captured data
+captures/
+
+# macOS
+.DS_Store
+
+# Kotlin
+*.class
+
+# Secrets / API keys
+secrets.properties
+apikeys.properties
