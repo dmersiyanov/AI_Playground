@@ -17,19 +17,26 @@ class DeepSeekApiClient(private val apiKey: String) {
         .readTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    suspend fun sendMessageAsync(message: String): String = withContext(Dispatchers.IO) {
+    suspend fun sendMessageAsync(
+        message: String,
+        systemPrompt: String = "Отвечай только на русском языке.",
+        maxTokens: Int? = null,
+        stopSequences: List<String>? = null
+    ): String = withContext(Dispatchers.IO) {
         val body = JSONObject().apply {
             put("model", "deepseek-chat")
             put("messages", JSONArray().apply {
                 put(JSONObject().apply {
                     put("role", "system")
-                    put("content", "Отвечай только на русском языке.")
+                    put("content", systemPrompt)
                 })
                 put(JSONObject().apply {
                     put("role", "user")
                     put("content", message)
                 })
             })
+            maxTokens?.let { put("max_tokens", it) }
+            stopSequences?.let { put("stop", JSONArray(it)) }
         }.toString()
 
         val request = Request.Builder()
